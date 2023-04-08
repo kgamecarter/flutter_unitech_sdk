@@ -26,4 +26,12 @@ abstract class UnitechSdkPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<void> setTimeMode(int mode) {
+    throw UnimplementedError('setTimeMode() has not been implemented.');
+  }
+
+  Future<void> setDateTime(DateTime dateTime) {
+    throw UnimplementedError('setDateTime() has not been implemented.');
+  }
 }
