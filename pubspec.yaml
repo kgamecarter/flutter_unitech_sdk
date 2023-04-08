@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
   intl: ^0.18.0
+  flutter_broadcasts: ^0.3.0
+  android_intent_plus: ^3.1.6
 
 dev_dependencies:
   flutter_test:
