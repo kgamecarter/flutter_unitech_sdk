@@ -33,6 +33,7 @@ class UnitechSdkPlugin: FlutterPlugin, MethodCallHandler {
         var clock = ClockCtrl(context)
         thread (start = true) {
           clock.setTimeMode(call.arguments as Int)
+          result.success(null)
         }
       }
       "setDateTime" -> {
@@ -41,14 +42,10 @@ class UnitechSdkPlugin: FlutterPlugin, MethodCallHandler {
           var args = call.arguments as ArrayList<String>
           clock.setManualDate(args[0])
           clock.setManualTime(args[1])
+          result.success(null)
         }
       }
-      else ->  result.notImplemented()
-    }
-    if (call.method == "setTimeMode") {
-      result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
-      result.notImplemented()
+      else -> result.notImplemented()
     }
   }
 
