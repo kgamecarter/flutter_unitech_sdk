@@ -18,17 +18,33 @@ class MethodChannelUnitechSdk extends UnitechSdkPlatform {
   }
 
   @override
-  Future<void> setTimeMode(int mode) async {
-    await methodChannel.invokeMethod<void>('setTimeMode', mode);
+  Future<void> clockCtrl_setTimeMode(int mode) async {
+    await methodChannel.invokeMethod<void>('ClockCtrl.setTimeMode', mode);
   }
 
   final format = DateFormat('dd/MM/yyyy HH:mm:ss');
 
   @override
-  Future<void> setDateTime(DateTime dateTime) async {
+  Future<void> clockCtrl_setDateTime(DateTime dateTime) async {
     await methodChannel.invokeMethod<void>(
-      'setDateTime',
+      'ClockCtrl.setDateTime',
       format.format(dateTime).split(' '),
+    );
+  }
+
+  @override
+  Future<void> appManagementCtrl_installApp(String path, String pkgName) async {
+    await methodChannel.invokeMethod<void>(
+      'AppManagementCtrl.installApp',
+      <String>[path, pkgName],
+    );
+  }
+
+  @override
+  Future<void> appManagementCtrl_runSysCmd(String command) async {
+    await methodChannel.invokeMethod<void>(
+      'AppManagementCtrl.runSysCmd',
+      command,
     );
   }
 }

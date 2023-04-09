@@ -11,10 +11,17 @@ class MockUnitechSdkPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<void> setTimeMode(int mode) => Future.value();
+  Future<void> clockCtrl_setTimeMode(int mode) => Future.value();
 
   @override
-  Future<void> setDateTime(DateTime dateTime) => Future.value();
+  Future<void> clockCtrl_setDateTime(DateTime dateTime) => Future.value();
+
+  @override
+  Future<void> appManagementCtrl_installApp(String path, String pkgName) =>
+      Future.value();
+
+  @override
+  Future<void> appManagementCtrl_runSysCmd(String command) => Future.value();
 }
 
 void main() {

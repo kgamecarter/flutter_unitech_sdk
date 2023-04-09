@@ -27,11 +27,19 @@ abstract class UnitechSdkPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<void> setTimeMode(int mode) {
+  Future<void> clockCtrl_setTimeMode(int mode) {
     throw UnimplementedError('setTimeMode() has not been implemented.');
   }
 
-  Future<void> setDateTime(DateTime dateTime) {
+  Future<void> clockCtrl_setDateTime(DateTime dateTime) {
     throw UnimplementedError('setDateTime() has not been implemented.');
+  }
+
+  Future<void> appManagementCtrl_installApp(String path, String pkgName) {
+    throw UnimplementedError('setDateTime() has not been implemented.');
+  }
+
+  Future<void> appManagementCtrl_runSysCmd(String command) {
+    throw UnimplementedError('setTimeMode() has not been implemented.');
   }
 }

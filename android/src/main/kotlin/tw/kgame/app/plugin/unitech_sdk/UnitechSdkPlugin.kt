@@ -10,6 +10,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
 import com.unitech.api.clock.ClockCtrl;
+import com.unitech.api.app.AppManagementCtrl;
 import kotlin.concurrent.thread
 
 /** UnitechSdkPlugin */
@@ -29,19 +30,34 @@ class UnitechSdkPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     when (call.method) {
-      "setTimeMode" -> {
+      "ClockCtrl.setTimeMode" -> {
         var clock = ClockCtrl(context)
         thread (start = true) {
           clock.setTimeMode(call.arguments as Int)
           result.success(null)
         }
       }
-      "setDateTime" -> {
+      "ClockCtrl.setDateTime" -> {
         var clock = ClockCtrl(context)
         thread (start = true) {
           var args = call.arguments as ArrayList<String>
           clock.setManualDate(args[0])
           clock.setManualTime(args[1])
+          result.success(null)
+        }
+      }
+      "AppManagementCtrl.installApp" -> {
+        var app = AppManagementCtrl(context)
+        thread (start = true) {
+          var args = call.arguments as ArrayList<String>
+          app.installApp(args[0], args[1], null)
+          result.success(null)
+        }
+      }
+      "AppManagementCtrl.runSysCmd" -> {
+        var app = AppManagementCtrl(context)
+        thread (start = true) {
+          app.runSysCmd(call.arguments as String)
           result.success(null)
         }
       }
