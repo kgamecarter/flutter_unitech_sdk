@@ -11,16 +11,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:unitech_sdk_example/main.dart';
 
 void main() {
-  testWidgets('Verify Platform version', (WidgetTester tester) async {
+  testWidgets('Verify Scanner title', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that platform version is retrieved.
+    // Verify that Scanner title is present.
     expect(
-      find.byWidgetPredicate(
-        (Widget widget) => widget is Text &&
-                           widget.data!.startsWith('Running on:'),
-      ),
+      find.text('Scanner'),
       findsOneWidget,
     );
   });

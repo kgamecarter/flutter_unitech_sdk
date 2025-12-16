@@ -8,20 +8,17 @@ class MockUnitechSdkPlatform
     with MockPlatformInterfaceMixin
     implements UnitechSdkPlatform {
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<void> clockCtrlSetTimeMode(int mode) => Future.value();
 
   @override
-  Future<void> clockCtrl_setTimeMode(int mode) => Future.value();
+  Future<void> clockCtrlSetDateTime(DateTime dateTime) => Future.value();
 
   @override
-  Future<void> clockCtrl_setDateTime(DateTime dateTime) => Future.value();
-
-  @override
-  Future<void> appManagementCtrl_installApp(String path, String pkgName) =>
+  Future<void> appManagementCtrlInstallApp(String path, String pkgName) =>
       Future.value();
 
   @override
-  Future<void> appManagementCtrl_runSysCmd(String command) => Future.value();
+  Future<void> appManagementCtrlRunSysCmd(String command) => Future.value();
 }
 
 void main() {
@@ -29,13 +26,5 @@ void main() {
 
   test('$MethodChannelUnitechSdk is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelUnitechSdk>());
-  });
-
-  test('getPlatformVersion', () async {
-    //UnitechSdk unitechSdkPlugin = UnitechSdk();
-    MockUnitechSdkPlatform fakePlatform = MockUnitechSdkPlatform();
-    UnitechSdkPlatform.instance = fakePlatform;
-
-    //expect(await unitechSdkPlugin.getPlatformVersion(), '42');
   });
 }
