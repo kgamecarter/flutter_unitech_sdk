@@ -24,6 +24,51 @@ dependencies:
 
 ## Usage
 
+### Instance API and architecture
+
+For applications that need dependency injection and an owned scanner lifecycle,
+use the instance API:
+
+```dart
+import 'package:unitech_sdk/unitech_sdk.dart';
+
+final sdk = UnitechSdk();
+final subscription = sdk.scanMessages.listen((message) {
+  print(message.data);
+});
+
+try {
+  await sdk.startListening();
+  await sdk.setScannerEnabled(true);
+  await sdk.setScan2KeyEnabled(false);
+  // Keep the subscription alive while your screen or controller is active.
+} finally {
+  await subscription.cancel();
+  await sdk.close();
+}
+```
+
+In a real screen, start listening during initialization and perform the cleanup
+when the owning controller is disposed, as shown in [example](example/).
+Each instance owns a separate receiver; repeated start/close calls are safe,
+and a closed receiver cannot be restarted. Startup errors are returned by
+`startListening`, and cleanup errors by `close`, when reported by the underlying
+broadcast plugin. The instance API also provides `setTimeMode`, `setDateTime`,
+`installApp`, and `runSysCmd`.
+
+The SDK is the device data-access boundary: `UnitechSdk` composes the platform
+interface and scanner broadcast service. UI state stays in the application's
+ViewModel. The example uses only a view and a ViewModel, with constructor
+injection and no extra architecture packages.
+
+Existing `Scanner`, `ClockCtrl`, and `AppManagementCtrl` entry points remain
+available. Scanner commands now return `Future<void>` so callers can await
+broadcast completion and handle errors. Existing calls may continue to ignore
+the result, and the methods can still be used as `void Function(bool)` callbacks.
+Projects enabling `unawaited_futures` may need to explicitly ignore the future.
+Completion means the command was sent,
+not that the device has finished installing an APK or applying every operation.
+
 ### 1. Scanner
 
 Control the built-in barcode scanner.

@@ -2,7 +2,8 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 
 class Scanner {
-  static void enableScanner(bool enable) {
+  /// Sends the scanner setting and completes when the broadcast is sent.
+  static Future<void> enableScanner(bool enable) {
     var intent = AndroidIntent(
       action:
           enable ? "unitech.scanservice.start" : "unitech.scanservice.close",
@@ -10,17 +11,18 @@ class Scanner {
         'close': true,
       },
     );
-    intent.sendBroadcast();
+    return intent.sendBroadcast();
   }
 
-  static void enableScan2Key(bool enable) {
+  /// Sends the keyboard-wedge setting and reports broadcast failures.
+  static Future<void> enableScan2Key(bool enable) {
     var intent = AndroidIntent(
       action: "unitech.scanservice.scan2key_setting",
       arguments: {
         'scan2key': enable,
       },
     );
-    intent.sendBroadcast();
+    return intent.sendBroadcast();
   }
 
   static final BroadcastReceiver scannerReceiver = BroadcastReceiver(
