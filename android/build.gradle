@@ -1,16 +1,18 @@
-group 'tw.kgame.app.plugin.unitech_sdk'
-version '1.0-SNAPSHOT'
+group = 'tw.kgame.app.plugin.unitech_sdk'
+version = '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
-    repositories {
-        google()
-        mavenCentral()
-    }
+    // Flutter host apps supply these plugins when they include this module.
+    if (project == rootProject) {
+        repositories {
+            google()
+            mavenCentral()
+        }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        dependencies {
+            classpath 'com.android.tools.build:gradle:9.3.1'
+            classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.21'
+        }
     }
 }
 
@@ -30,12 +32,12 @@ if (usesLegacyKotlin) {
 }
 
 android {
-    namespace 'tw.kgame.app.plugin.unitech_sdk'
-    compileSdkVersion 36
+    namespace = 'tw.kgame.app.plugin.unitech_sdk'
+    compileSdk = 36
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     if (usesLegacyKotlin) {
@@ -45,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdk = 16
     }
 }
 
