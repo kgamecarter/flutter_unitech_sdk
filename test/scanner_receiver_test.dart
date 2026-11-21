@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:unitech_sdk/scanner.dart';
 import 'package:unitech_sdk/unitech_sdk.dart';
@@ -8,15 +7,13 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('instance receivers coexist with the legacy shared receiver', () async {
-    const channel = MethodChannel('de.kevlatus.flutter_broadcasts');
+    const channel = MethodChannel('unitech_sdk/scanner');
     final messenger =
         TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     final activeIds = <int>{};
     messenger.setMockMethodCallHandler(channel, (call) async {
-      final args = call.arguments as Map;
-      final id = args['id'] as int;
+      final id = call.arguments as int;
       if (call.method == 'startReceiver') {
-        expect(args['names'], ['unitech.scanservice.data']);
         activeIds.add(id);
       } else if (call.method == 'stopReceiver') {
         activeIds.remove(id);

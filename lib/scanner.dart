@@ -1,5 +1,8 @@
 import 'package:android_intent_plus/android_intent.dart';
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
+
+import 'scanner_receiver.dart';
+
+export 'scanner_receiver.dart';
 
 class Scanner {
   /// Sends the scanner setting and completes when the broadcast is sent.
@@ -25,9 +28,5 @@ class Scanner {
     return intent.sendBroadcast();
   }
 
-  static final BroadcastReceiver scannerReceiver = BroadcastReceiver(
-    names: <String>[
-      "unitech.scanservice.data",
-    ],
-  );
+  static final ScannerReceiver scannerReceiver = ScannerReceiver();
 }

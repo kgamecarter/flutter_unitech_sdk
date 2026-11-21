@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:unitech_sdk/unitech_sdk.dart';
 
 class FakeSdk extends UnitechSdk {

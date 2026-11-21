@@ -99,11 +99,10 @@ Scanner.enableScan2Key(false);
 
 #### Listen for Scan Data
 
-Use the `scannerReceiver` to listen for broadcast intents from the scanner service (`unitech.scanservice.data`).
+The SDK receives `unitech.scanservice.data` directly on Android. Listen through `scannerReceiver` to read the broadcast extras, including the barcode in `data?['text']`.
 
 ```dart
 import 'package:unitech_sdk/scanner.dart';
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 
 // ... inside your widget or controller initialization
 
@@ -164,7 +163,6 @@ await ClockCtrl.setDateTime(DateTime.now());
 ## Dependencies
 
 This package relies on the following plugins:
-*   [flutter_broadcasts](https://pub.dev/packages/flutter_broadcasts)
 *   [android_intent_plus](https://pub.dev/packages/android_intent_plus)
 *   [intl](https://pub.dev/packages/intl)
 

@@ -1,7 +1,7 @@
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
-
 import 'scanner.dart';
 import 'unitech_sdk_platform_interface.dart';
+
+export 'scanner_receiver.dart';
 
 /// An injectable device API with its own scanner receiver.
 ///
@@ -10,13 +10,12 @@ import 'unitech_sdk_platform_interface.dart';
 class UnitechSdk {
   UnitechSdk({
     UnitechSdkPlatform? platform,
-    BroadcastReceiver? receiver,
+    ScannerReceiver? receiver,
   })  : _platform = platform,
-        _receiver = receiver ??
-            BroadcastReceiver(names: const ['unitech.scanservice.data']);
+        _receiver = receiver ?? ScannerReceiver();
 
   final UnitechSdkPlatform? _platform;
-  final BroadcastReceiver _receiver;
+  final ScannerReceiver _receiver;
   Future<void>? _starting;
   Future<void>? _closing;
   bool _closed = false;

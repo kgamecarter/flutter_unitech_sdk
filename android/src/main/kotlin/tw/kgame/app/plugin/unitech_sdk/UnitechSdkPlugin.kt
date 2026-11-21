@@ -21,11 +21,16 @@ class UnitechSdkPlugin: FlutterPlugin, MethodCallHandler {
   /// when the Flutter Engine is detached from the Activity
   private lateinit var channel : MethodChannel
   private lateinit var context: Context
+  private lateinit var scannerChannel: MethodChannel
+  private lateinit var scannerHandler: ScannerBroadcastHandler
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "unitech_sdk")
     channel.setMethodCallHandler(this)
     context = flutterPluginBinding.applicationContext
+    scannerChannel = MethodChannel(flutterPluginBinding.binaryMessenger, "unitech_sdk/scanner")
+    scannerHandler = ScannerBroadcastHandler(context, scannerChannel)
+    scannerChannel.setMethodCallHandler(scannerHandler)
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -67,5 +72,7 @@ class UnitechSdkPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
+    scannerChannel.setMethodCallHandler(null)
+    scannerHandler.close()
   }
 }

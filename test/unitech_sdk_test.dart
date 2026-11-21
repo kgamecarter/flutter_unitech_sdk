@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:unitech_sdk/app_management_ctrl.dart';
 import 'package:unitech_sdk/clock_ctrl.dart';
@@ -23,8 +22,7 @@ class FakePlatform extends UnitechSdkPlatform {
       calls.add(command);
 }
 
-class FakeReceiver extends BroadcastReceiver {
-  FakeReceiver() : super(names: ['unitech.scanservice.data']);
+class FakeReceiver extends ScannerReceiver {
   final events = StreamController<BroadcastMessage>.broadcast();
   Completer<void>? startup;
   int starts = 0;

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:unitech_sdk/unitech_sdk.dart';
 
 /// Owns the SDK instance passed to it; the view only renders its state.

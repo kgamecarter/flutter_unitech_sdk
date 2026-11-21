@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:unitech_sdk/unitech_sdk.dart';
 import 'package:unitech_sdk_example/demo_view_model.dart';
 
 import 'fake_sdk.dart';
